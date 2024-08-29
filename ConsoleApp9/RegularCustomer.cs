@@ -12,19 +12,28 @@ namespace ConsoleApp9
         private string name;
         private List<Vehicle> rentedVehicles=new List<Vehicle>();
 
+        public RegularCustomer(string name)
+        {
+            this.name = name;
+        }
+
         public string getName()
         {
             return name;
         }
-        public void rentVehicle(Vehicle vehicle, int days)
+        public double rentVehicle(Vehicle vehicle, int days)
         {
+            
             rentedVehicles.Add(vehicle);
+
+            return  vehicle.calculateRentalCost(days);
+
+
         }
         public List<Vehicle> getRentedVehicles()
         {
             return rentedVehicles;
         }
-
         
     }
 }

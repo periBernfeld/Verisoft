@@ -10,9 +10,14 @@ namespace ConsoleApp9
     {
         private int capacity;
 
+        public Truck(string licensePlate, string make, string model,double  rentalPrice, int capacity) : base(licensePlate, make, model,rentalPrice)
+        {
+             this.capacity = capacity;
+        }
+
         public override double calculateRentalCost(int days)
         {
-            return days * getRentalPrice() + capacity;
+            return days * (getRentalPrice() + capacity);
 
         }
     }

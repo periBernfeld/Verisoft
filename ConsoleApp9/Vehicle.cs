@@ -11,11 +11,21 @@ namespace ConsoleApp9
         private string licensePlate;
         private string make;
         private string model;
+        //private int days;
         protected double rentalPrice { get; set; }
 
+        protected Vehicle(string licensePlate, string make, string model, double rentalPrice)
+        {
+            this.licensePlate = licensePlate;
+            this.make = make;
+            this.model = model;
+            this.rentalPrice = rentalPrice;
+        }
 
-        public string GetLicensePlate() { return licensePlate; }
-        public string GetMake() { return make; }
+      //  public int getDays() { return days; }   
+      //  public void setDays(int days) { this.days = days; }
+        public string getLicensePlate() { return licensePlate; }
+        public string getMake() { return make; }
         public string getModel() { return model; }
         public double getRentalPrice() { return rentalPrice; }
 

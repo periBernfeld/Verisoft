@@ -8,10 +8,11 @@ namespace ConsoleApp9
 {
     public interface ICustomer
     {
+
         public string getName();
 
         //מחשב השכרת רכב למספר נתון של ימים
-        public void rentVehicle(Vehicle vehicle, int days);
+        public double rentVehicle(Vehicle vehicle, int days);
 
         public List<Vehicle>  getRentedVehicles();
     }
