@@ -11,7 +11,7 @@ namespace ConsoleApp9
 
         public string getName();
 
-        //מחשב השכרת רכב למספר נתון של ימים
+      
         public double rentVehicle(Vehicle vehicle, int days);
 
         public List<Vehicle>  getRentedVehicles();

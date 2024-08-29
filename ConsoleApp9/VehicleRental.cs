@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -12,10 +13,10 @@ namespace ConsoleApp9
     public class VehicleRental
     {
 
-        //רשימת  רכבים שכורים
-         private static List<Vehicle> rentalVehiclesList = new List<Vehicle>();
+        //Car rental list
+        private static List<Vehicle> rentalVehiclesList = new List<Vehicle>();
 
-        //רשימה של הרכבים
+        //Car list
         private static List<Vehicle> vehiclesList = new List<Vehicle>();
 
         static void Main(string[] args)
@@ -27,13 +28,13 @@ namespace ConsoleApp9
             vehiclesList.Add(toyota);
             vehiclesList.Add(skoda);
 
-            Truck truck1 = new Truck("655444", "gg", "r555",300, 300);
-            Truck truck2 = new Truck("656545", "ffd", "e333",500, 900);
-            Truck truck3 = new Truck("324666", "gg", "s508",800, 1000);
+            Truck refrigeratedTruck = new Truck("655444", "skoda", "r555",300, 300);
+            Truck transportTruck = new Truck("656545", "ford", "e333",500, 900);
+            Truck garbageTruck = new Truck("324666", "gg", "isuzu",800, 1000);
 
-            vehiclesList.Add(truck1);
-            vehiclesList.Add(truck2);
-            vehiclesList.Add(truck3);
+            vehiclesList.Add(refrigeratedTruck);
+            vehiclesList.Add(transportTruck);
+            vehiclesList.Add(garbageTruck);
 
             RegularCustomer customerAvi = new RegularCustomer("Avi");
             RegularCustomer customerBenni = new RegularCustomer("Benni");
@@ -45,19 +46,19 @@ namespace ConsoleApp9
              double price = Rental(mazda, customerAvi, 5);
 
 
-            Console.WriteLine(  "רשימת הרכבים");
+            Console.WriteLine(  "List of cars");
             PrintVehicles(vehiclesList);
-            Console.WriteLine("רשימת הרכבים השכורים");
+            Console.WriteLine("List of cars hired out");
             PrintVehicles(rentalVehiclesList);
 
 
 
 
         }
-        //השכרת רכב ללקוח
+        //Car rental to the customer
         public static double Rental(Vehicle vehicle,ICustomer customer,int days)
         {
-            //בדיקה האם הרכב פנוי
+            //Check if the car is free
             if (rentalVehiclesList.Contains(vehicle))
             {
                 Console.WriteLine(vehicle.getMake()+" is not free.");
@@ -66,18 +67,17 @@ namespace ConsoleApp9
             }
             rentalVehiclesList.Add(vehicle);
             double price=customer.rentVehicle(vehicle,days);
-            Console.WriteLine( vehicle is Car ? "הרכב הושכר בהצלחה" : "המשאית הושכרה בהצלחה");
+            Console.WriteLine( vehicle is Car ? "The car hire was completed succesfully" : "The truck was succesfully rented");
 
             return price;
             
         }
 
-        //הדפסת הרכבים ומיחריהם
+        //print vehichle and their prices
         public static void PrintVehicles(List<Vehicle> vehicles)
         {
             foreach (var vehicle in vehicles)       
             {
-                ///"mazda model 222 cost " + 
                 string toPrint = vehicle.getMake() + " model " + vehicle.getModel() + " cost " + vehicle.getRentalPrice()+  "for a day";
                 Console.WriteLine(toPrint);
             }
@@ -86,21 +86,23 @@ namespace ConsoleApp9
         [Fact]
         public void TestRentalVehicles()
         {
-            //  הכנת הנתונים לבדיקה
+            //  Prepare your data for review
             RegularCustomer customerAvi = new RegularCustomer("Avi");
             RegularCustomer customerBenni = new RegularCustomer("Benni");
             RegularCustomer customerDavid = new RegularCustomer("David");
 
             CorporateCustomer companyOND = new CorporateCustomer("OND");
             CorporateCustomer companyAEO = new CorporateCustomer("AEO");
+            CorporateCustomer companyERF = new CorporateCustomer("ERF");
+
 
             Car mazda = new Car("456767", "mazde", "b501", 200, "5 places");
 
 
-            // Act - קריאת הפונקציה שאותה נבדוק
+            // Act - Read the function we will test
             double price  = Rental(mazda,customerAvi,5);
 
-            // Assert - בדיקה שהפונקציה מחזירה את התוצאה הנכונה
+            // Assert - Make sure that the function returns the correct result
             Assert.Equal(1000, price);
         }
     }

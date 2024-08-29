@@ -11,7 +11,6 @@ namespace ConsoleApp9
     {
         private string type;
 
-
         public Car(string licensePlate, string make, string model, double rentalPrice,string type ) : base(licensePlate, make, model,rentalPrice)
         {
           this.type=type;
